@@ -1,0 +1,89 @@
+***********************
+* Java Bittorrent API *
+***********************
+
+Author: Baptiste Dubuis
+
+Version: 1.0
+
+Description:
+
+   This package aims at providing users an intuitive and easy to use API to run 
+   Bittorrent programs capable of creating and publishing torrent files, downloading
+   them and also retrieving target files described in a torrent file.
+
+   The package comes along with 4 simple example classes that implement each a 
+   distinct part of the protocol:
+
+      ExampleCreateTorrent: create a new torrent file
+      ExamplePublish: publish a torrent file on smartorrent.com or a tracker using 
+                      trackerBT (provided with Java Bittorrent API and available on 
+                         http://sourceforge.net/projects/bitext
+      ExampleShareFiles: share files described in a torrent file with other people
+      ExampleDownloadFiles: download and upload files described in a torrent
+
+Compilation:
+   
+   - Compile the files simply using java command from the src directory. For example, from a console using:
+        javac jBittorrentAPI/*.java
+
+Execution of the examples:
+   - ExampleCreateTorrent: to be executed, the program needs some input parameters. 
+     Therefore, the command to launch the execution is (from the src directory):
+        java jBittorrentAPI.ExampleCreateTorrent <torrentPath> <announceURL> <pieceLength> <filePath1> ... <filePathN> <..> <creator> <..> <comment>
+     Information about the parameters:
+       - <torrentPath>: the path and name of the file the torrent will be saved as. 
+         Must end with .torrent extension. No space in it
+       - <announceURL>: the announce url of the tracker the user want the torrent 
+         to be published. No space in it.
+       - <pieceLength>: length of the pieces in kB (default=256kB) the target files 
+         will be split into. Must be an integer.
+       - <filePathX>: the path and name of the Xth file to be inserted in the 
+         torrent. If there is more than one such parameter, the first one must 
+         only be the name of the directory the target files will be saved into 
+         when a client downloads them.
+       - <..>: represent the string ".." and is used to separate parameters.
+       - <creator>: the name of the creator of the torrent. Recommended is that 
+         it represent the name and version of the program that created it.
+       - <comment>: comment about the torrent
+
+     Depending on the size of the target files and the piece length, the process 
+     can take some time.
+
+     Note here that for an easiest publishing process, the target files should be 
+     put in the download directory that you will used for file sharing before creating the 
+     torrent. That's because to share the target files, they have to be located in 
+     the download directory of the client. Therefore, copying it before simplifies 
+     the process. Note also that there is no restriction on the directory tree to 
+     access the target files
+   
+   - ExamplePublish: to be executed, the program needs some input parameters. 
+     Therefore, the command to launch the execution is:
+        java jBittorrentAPI.ExamplePublish <torrentPath> <trackerURL> <username> <password> <comment>
+     Information about the parameters:
+       - <torrentPath>: the path and name of the torrent the user wants to publish.
+       - <trackerURL>: the url of the tracker accepting torrent upload. Note here 
+         that for the moment, publishing is only possible on smartorrent tracker or 
+         on a host running the trackerBT tracker.
+       - <username>: the username registered on the tracker
+       - <password>: the password registered on the tracker
+       - <comment>: comment about the torrent, it will serve as a description for 
+         people searching for torrents.
+
+   - ExampleDownloadFiles and ExampleShareFiles: to be executed the program needs only the torrent 
+     path. Therefore, the command to launch the execution is:
+        java jBittorrentAPI.ExampleDownloadFiles <torrentPath> [<savingDirectory>]
+        java jBittorrentAPI.ExampleShareFiles <torrentPath> [<savingDirectory>]
+
+     The savingDirectory parameter is optional and permit to choose in which directory
+     the downloaded files will be saved or in the case of sharing, in which directory 
+     the shared files are located. By default they are saved in a directory 
+     called "downloads/" in the working directory.
+
+     These examples are the implementation of a bittorrent client. Therefore it 
+     permit to share files with other bittorrent clients. Not only this program can 
+     get files from other peers, but it is also necessary to seed the target files 
+     the user wants to publish. Therefore, just after publishing the torrent file on 
+     a tracker, the users would run this program so that other peers can download 
+     the target files just published.
+     

@@ -1,0 +1,84 @@
+***********************
+* Java Bittorrent API *
+***********************
+
+Author: Baptiste Dubuis, Artificial Intelligence Laboratory, EPFL
+
+Version: 1.0
+
+Webpage: http://sourceforge.net/projects/bitext/
+
+Description:
+
+   The Java Bittorrent API project aims at providing a simple and easy-to-use API
+   for future work on Bittorrent protocol. It provides classes and methods that 
+   permit to complete each step necessary to publish files and retrieve them 
+   using the Bittorrent network.
+
+   The goal is to provide any user the possibility to share files with other 
+   people without having to bother too much.
+   
+   In this scope, this project propose a bittorrent tracker that can be run to 
+   accept files for sharing. This tracker is part of the trackerBT package.
+
+   Provided also is a bittorrent API that permit to publish files using 
+   bittorrent protocol, as much as to download files from other people. This 
+   API is part of the jBittorrentAPI package.
+
+   - To publish files using bittorrent protocol, user have to follow these steps:
+      - Create a new torrent file which will provide information about the 
+        target files the user wants to publish and make available to others.
+        This can be done by running the ExampleCreateTorrent program.
+      - Publish this torrent file on a tracker so that other people can have 
+        access to the desription of the target files and then be able to 
+        download them. This is done by running the ExamplePublish program.
+      - Share the local target files to permit people to download files from
+        local directory. This is done by running the ExampleShareFiles program.
+
+   - To download files from other people, user have to get the torrent file from 
+     any tracker or web server and then run the ExampleDownloadFiles program.
+   For further instruction on how to use either the trackerBT or jBittorrentAPI 
+   packages, please read the corresponding README files:
+
+   For convenience, an example is provided to demonstrate the use of these program
+   step by step. Please read the README-example for further information.
+
+
+   Java Bittorrent API is free software;
+   you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   Java Bittorrent API is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Java Bittorrent API; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+
+   To contact the author:
+   email: baptiste.dubuis@gmail.com
+
+Content:
+   - README : Information about this release
+   - README-example : further instruction about how to run the examples provided
+   - README-jBittorrentAPI : further instruction about how to compile and execute
+                              the jBittorrentAPI package
+   - README-trackerBT : further instruction about how to compile and run the 
+                         trackerBT package
+   - env.bat : Environment configuration script for MS-Windows systems
+   - env.sh  : Environment configuration script for UNIX systems
+   - jBittorrentAPI.jar : compressed classes of the jBittorrentAPI package
+   - trackerBT.jar : compressed classes of the trackerBT package
+   - build/ : classes for jBittorrentAPI and trackerBT pachages
+   - documentation/ : documentation and javadoc of the jBittorrentAPI and trackerBT packages
+   - example/ : files and directory needed to run the provided example step by step
+   - ext/ : external libraries .jar files
+   - src/ : source files for jBittorrentAPI and trackerBT packages
+   - LICENSE : the license of this project
+   - GNU_GPL : The GNU General Public License
+
+   

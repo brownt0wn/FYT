@@ -1,0 +1,95 @@
+QUICK EXAMPLE TO TEST JBITTORRENT API.
+-----------------------------------------------------------------
+
+This is an example to test the JBitTorrent API.
+
+You may run this test using 4 computers connected through Internet,
+or you may run this test using only one computer.
+
+This is the set-up that we will use in this example.
+
+Computer   Task
+Tracker    The tracker used to publish the bit torrent files 
+Client1    A client that is sharing a file
+Client2    A client that wishes to download that file
+Client3    A client that wishes to download that file also, simultaneously
+
+
+In the example, we will assume that you run the four programs in the same computer.
+If that is not the case, you only need to substitute "localhost" by the IP of the computer running the tracker.
+
+#### THE TRACKER
+1. Download jbittorrentapi-v1.0.zip
+2. Unzip it
+3. Go to the console
+4. Set the CLASSPARTH
+   . ./env.sh (or execute env.bat if using MS Windows)
+5. Start the tracker
+   java trackerBT.Tracker example_tracker_config.xml     # It reads example_tracker_config.xml, change it according to your needs. By default, tracker listens on port 8081
+
+
+#### CLIENT1
+1. Download jbittorrentapi-v1.0.zip
+2. Unzip it
+3. Go to the console
+4. Set the CLASSPARTH
+   . ./env.sh (or execute env.bat if using MS Windows)
+
+5. We will share the file example/client1/funvideo05.wmv (only 3.8Mb long)
+   Otherwise, copy the file that you want to share into example/client1/funvideo.wmv
+   (for instance, take a file 100Mb or 1Gb long)
+
+6. Create a torrent file (description of the file(s) you want to share)
+   java jBittorrentAPI.ExampleCreateTorrent example/client1/funvideo.torrent http://localhost:8081/announce 256 example/client1/funvideo05.wmv .. "John Lynch" .. "this is a fun video"
+   
+   result:
+   Hashing the files...
+   Hash complete... Saving...
+   Torrent created successfully!!!
+
+7. Publish the torrent file to the tracker
+   java jBittorrentAPI.ExamplePublish example/client1/funvideo.torrent http://localhost:8081/upload none none "this is a fun video"
+   
+8. Start sharing the file (funvideo05.wmv)
+   java jBittorrentAPI.ExampleShareFiles example/client1/funvideo.torrent example/client1/
+
+   result:
+   Contact Tracker. URL source = http://localhost:8081/tracker?info_hash=%D7%B47%BC%E8p%D9%08%7B%CB%E7%C4%E0%F9%9B%40%98%9BSF&peer_id=-BE0001-%DDv%40%A1%93%BAy%98%93%DFGg&port=6881&downloaded=0&uploaded=0&left=4011946numwant=100&compact=1&event=started
+   Sharing... Press Ctrl+C to stop client
+
+9. Imagine you send the torrent file (example/client1/funvideo.torrent) to two friends by email, which will execute client2 and client3.
+
+
+#### CLIENT2
+1. Download jbittorrentapi-v1.0.zip
+2. Unzip it
+3. Go to the console
+4. Set the CLASSPARTH
+   . ./env.sh (or execute env.bat if using MS Windows)
+
+5. Put the torrent file that you received by email (funvideo.torrent) to example/client2/funvideo.torrent
+
+6. Download the file (funvideo05.wmw) using the bit torrent network
+   java jBittorrentAPI.ExampleDownloadFiles example/client2/funvideo.torrent example/client2/
+
+   result: after some time, you have downloaded example/client1/funvideo05.wmv
+
+
+
+#### CLIENT3. Execute this at the same time as client 2.
+1. Download jbittorrentapi-v1.0.zip
+2. Unzip it
+3. Go to the console
+4. Set the CLASSPARTH
+   . ./env.sh (or execute env.bat if using MS Windows)
+
+5. Put the torrent file that you received by email (funvideo.torrent) to example/client2/funvideo.torrent
+
+6. Download the file (funvideo05.wmw) using the bit torrent network
+   java jBittorrentAPI.ExampleDownloadFiles example/client2/funvideo.torrent example/client3/
+
+   result: after some time, you have downloaded example/client1/funvideo05.wmv
+
+
+
+------------------------------
